@@ -28,4 +28,8 @@ public class Restaurant {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public String toString() {
+		return getName();
+	}
 }
