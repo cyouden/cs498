@@ -59,10 +59,10 @@ public class LunchList extends Activity {
 			name.setText(r.getName());
 			address.setText(r.getAddress());
 			
-			if (r.getType().equals("sit_down")) {
+			if (r.getType() == Restaurant.Type.SIT_DOWN) {
 				icon.setImageResource(R.drawable.ball_red);
 			}
-			else if (r.getType().equals("take_out")) {
+			else if (r.getType() == Restaurant.Type.TAKE_OUT) {
 				icon.setImageResource(R.drawable.ball_yellow);
 			}
 			else {
@@ -102,16 +102,15 @@ public class LunchList extends Activity {
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());		
 			
-			//TODO: this should really be an enum
 			switch (types.getCheckedRadioButtonId()) {
 				case R.id.sit_down:
-					r.setType("sit_down");
+					r.setType(Restaurant.Type.SIT_DOWN);
 					break;
 				case R.id.take_out:
-					r.setType("take_out");
+					r.setType(Restaurant.Type.TAKE_OUT);
 					break;
 				case R.id.delivery:
-					r.setType("delivery");
+					r.setType(Restaurant.Type.DELIVERY);
 					break;
 			}
 			

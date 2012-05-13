@@ -1,9 +1,16 @@
 package apt.tutorial;
 
 public class Restaurant {
-	private String name="";
-	private String address="";
-	private String type="";
+	public enum Type {
+		NULL,
+		SIT_DOWN,
+		TAKE_OUT,
+		DELIVERY;
+	}
+	
+	private String name = "";
+	private String address = "";
+	private Type type = Type.NULL;
 	
 	public String getName() {
 		return name;
@@ -21,11 +28,11 @@ public class Restaurant {
 		this.address = address;
 	}
 
-	public String getType() {
+	public Type getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 	
