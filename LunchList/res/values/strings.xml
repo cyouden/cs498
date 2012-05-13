@@ -10,5 +10,6 @@
     <string name="sit_down_label">Sit-Down</string>
     <string name="delivery_label">Delivery</string>
     <string name="save_label">Save</string>
+    <string name="row_icon_content_description">Row icon</string>
 
 </resources>
