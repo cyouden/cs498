@@ -3,20 +3,26 @@ package apt.tutorial;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
+import android.app.TabActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.TabHost;
 import android.widget.TextView;
 
-public class LunchList extends Activity {
+public class LunchList extends TabActivity {
+	EditText name = null;
+	EditText address = null;
+	RadioGroup types = null;
+	
 	public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 		RestaurantAdapter() {
 			super(LunchList.this, R.layout.row, model);
@@ -79,6 +85,10 @@ public class LunchList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        name = (EditText)findViewById(R.id.name);
+		address = (EditText)findViewById(R.id.address);
+		types = (RadioGroup)findViewById(R.id.types);
+        
         Button save = (Button)findViewById(R.id.save);
         
         save.setOnClickListener(onSave);
@@ -88,16 +98,28 @@ public class LunchList extends Activity {
         adapter = new RestaurantAdapter();
         
         list.setAdapter(adapter);
+        
+        TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
+        spec.setContent(R.id.restaurants);
+        spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
+        
+        getTabHost().addTab(spec);
+        
+        spec = getTabHost().newTabSpec("tag2");
+        spec.setContent(R.id.details);
+        spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
+        
+        getTabHost().addTab(spec);
+        
+        getTabHost().setCurrentTab(0);
+        
+        list.setOnItemClickListener(onListClick);
     }
     
     private View.OnClickListener onSave = new View.OnClickListener() {
 		
 		public void onClick(View v) {
 			Restaurant r = new Restaurant();
-			
-			EditText name = (EditText)findViewById(R.id.name);
-			EditText address = (EditText)findViewById(R.id.address);
-			RadioGroup types = (RadioGroup)findViewById(R.id.types);
 			
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());		
@@ -115,6 +137,29 @@ public class LunchList extends Activity {
 			}
 			
 			adapter.add(r);
+		}
+	};
+	
+	private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			Restaurant r = model.get(position);
+			
+			name.setText(r.getName());
+			address.setText(r.getAddress());
+			
+			switch(r.getType())
+			{
+			case SIT_DOWN:
+				types.check(R.id.sit_down);
+				break;
+			case TAKE_OUT:
+				types.check(R.id.take_out);
+				break;
+			case DELIVERY:
+				types.check(R.id.delivery);
+			}
+			
+			getTabHost().setCurrentTab(1);
 		}
 	};
 }
