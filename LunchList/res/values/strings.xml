@@ -11,5 +11,6 @@
     <string name="delivery_label">Delivery</string>
     <string name="save_label">Save</string>
     <string name="row_icon_content_description">Row icon</string>
+    <string name="notes_label">Notes:</string>
 
 </resources>
