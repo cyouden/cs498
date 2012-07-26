@@ -5,12 +5,14 @@ import java.util.List;
 
 import android.app.TabActivity;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,6 +30,7 @@ public class LunchList extends TabActivity {
 	private EditText notes = null;
 	private RadioGroup types = null;
 	private Restaurant current = null;
+	private int progress = 0;
 	
 	public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 		RestaurantAdapter() {
@@ -59,7 +62,7 @@ public class LunchList extends TabActivity {
 		private TextView name = null;
 		private TextView address = null;
 		private ImageView icon = null;
-		
+				
 		RestaurantHolder(View row) {
 			name = (TextView)row.findViewById(R.id.title);
 			address = (TextView)row.findViewById(R.id.address_row_view);
@@ -89,6 +92,7 @@ public class LunchList extends TabActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.main);
         
         name = (EditText)findViewById(R.id.name);
@@ -181,7 +185,8 @@ public class LunchList extends TabActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.toast) {
+		switch (item.getItemId()) {
+		case R.id.toast:
 			String message = "No restaurant selected";
 			
 			if (current != null) {
@@ -191,8 +196,40 @@ public class LunchList extends TabActivity {
 			Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 			
 			return true;
+			
+		case R.id.run:
+			setProgressBarVisibility(true);
+			progress = 0;			
+			new Thread(longTask).start();
+			
+			return true;
 		}
 		
 		return super.onOptionsItemSelected(item);
 	}
+	
+	private void doSomeLongWork(final int incr) {
+		runOnUiThread(new Runnable() {
+			public void run() {
+				progress += incr;
+				setProgress(progress);
+			}
+		});
+		
+		SystemClock.sleep(250);
+	}
+	
+	private Runnable longTask = new Runnable() {
+		public void run() {
+			for (int i = 0; i < 20; ++i) {
+				doSomeLongWork(500);
+			}
+			
+			runOnUiThread(new Runnable() {
+				public void run() {
+					setProgressBarVisibility(false);
+				}
+			});
+		}
+	};
 }
