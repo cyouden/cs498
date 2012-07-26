@@ -2,6 +2,7 @@ package apt.tutorial;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.app.TabActivity;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class LunchList extends TabActivity {
 	private RadioGroup types = null;
 	private Restaurant current = null;
 	private int progress = 0;
+	private AtomicBoolean isActive = new AtomicBoolean(true);
 	
 	public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 		RestaurantAdapter() {
@@ -198,14 +200,35 @@ public class LunchList extends TabActivity {
 			return true;
 			
 		case R.id.run:
-			setProgressBarVisibility(true);
-			progress = 0;			
-			new Thread(longTask).start();
+			startWork();
 			
 			return true;
 		}
 		
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override 
+	public void onPause() {
+		super.onPause();
+		
+		isActive.set(false);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		isActive.set(true);
+		
+		if (progress > 0) {
+			startWork();
+		}
+	}
+	
+	private void startWork() {
+		setProgressBarVisibility(true);
+		new Thread(longTask).start();
 	}
 	
 	private void doSomeLongWork(final int incr) {
@@ -221,13 +244,14 @@ public class LunchList extends TabActivity {
 	
 	private Runnable longTask = new Runnable() {
 		public void run() {
-			for (int i = 0; i < 20; ++i) {
-				doSomeLongWork(500);
+			for (int i = 0; i < 10000 && isActive.get(); i += 200) {
+				doSomeLongWork(200);
 			}
 			
 			runOnUiThread(new Runnable() {
 				public void run() {
 					setProgressBarVisibility(false);
+					progress = 0;
 				}
 			});
 		}
