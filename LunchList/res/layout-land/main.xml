@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@android:id/tabhost"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" >
+  
+  <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+  
+  <TabWidget android:id="@android:id/tabs"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    
+  <FrameLayout android:id="@android:id/tabcontent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <ListView android:id="@+id/restaurants"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent" />
+
+      <ScrollView 
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" >
+    
+	      <TableLayout
+	        android:id="@+id/details"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:stretchColumns="1,3"
+	        android:shrinkColumns="3" 
+	        android:paddingTop="4dip" >
+	
+	        <TableRow>
+	
+	          <TextView 
+	              android:text="@string/name_label" 
+	              android:paddingRight="2dip" />
+	
+	          <EditText
+	            android:id="@+id/name"
+	            android:inputType="text"
+	            android:maxWidth="140sp" />
+	
+	          <TextView 
+	              android:text="@string/address_label"
+	              android:paddingLeft="2dip"
+	              android:paddingRight="2dip" />
+	
+	          <EditText
+	            android:id="@+id/address"
+	            android:inputType="textPostalAddress"
+	            android:maxWidth="140sp" />
+	
+	        </TableRow>
+	
+	        <TableRow>
+	
+	          <TextView android:text="@string/type_label" />
+	
+	          <RadioGroup android:id="@+id/types" >
+	
+	            <RadioButton
+	              android:id="@+id/take_out"
+	              android:checked="true"
+	              android:text="@string/take_out_label" />
+	
+	            <RadioButton
+	              android:id="@+id/sit_down"
+	              android:text="@string/sit_down_label" />
+	
+	            <RadioButton
+	              android:id="@+id/delivery"
+	              android:text="@string/delivery_label" />
+	
+	          </RadioGroup>
+	          
+	          <TextView 
+	              android:text="@string/notes_label"
+	              android:paddingLeft="2dip" />
+	          
+	          <LinearLayout
+	              android:layout_width="match_parent"
+	              android:layout_height="match_parent"
+	              android:orientation="vertical" >
+	            
+		          <EditText 
+		              android:id="@+id/notes"
+			          android:inputType="textMultiLine"
+			          android:singleLine="false"
+			          android:gravity="top"
+			          android:lines="3"
+			          android:scrollHorizontally="false"
+			          android:maxLines="3"
+			          android:layout_width="match_parent"
+	          		  android:layout_height="wrap_content" />
+		           
+		        <Button
+		          android:id="@+id/save"
+		          android:layout_width="match_parent"
+		          android:layout_height="wrap_content"
+		          android:text="@string/save_label" />
+	        
+	        </LinearLayout>
+	      </TableRow>
+	    </TableLayout>
+      </ScrollView>
+    </FrameLayout>
+  </LinearLayout>
+</TabHost>
