@@ -10,6 +10,10 @@ public class RestaurantHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "lunchlist.db";
 	private static final int SCHEMA_VERSION = 1;
 	
+	// Database queries
+	private static final String GET_ALL_QUERY = "SELECT _id, name, address, type, notes FROM restaurants ORDER BY name;";
+	private static final String GET_BY_ID_QUERY = "SELECT _id, name, address, type, notes FROM restaurants WHERE _ID=?;";
+	
 	public RestaurantHelper(Context context) {
 		super(context, DATABASE_NAME, null, SCHEMA_VERSION);
 	}
@@ -35,8 +39,26 @@ public class RestaurantHelper extends SQLiteOpenHelper {
 		getWritableDatabase().insert("restaurants", "name", cv);
 	}
 	
+	public void update(String id, String name, String address, String type, String notes) {
+		ContentValues cv = new ContentValues();
+		String[] args = { id };
+		
+		cv.put("name", name);
+		cv.put("address", address);
+		cv.put("type", type);
+		cv.put("notes", notes);
+		
+		getWritableDatabase().update("restaurants", cv,  "_ID=?", args);
+	}
+	
 	public Cursor getAll() {
-		return getReadableDatabase().rawQuery("SELECT _id, name, address, type, notes FROM restaurants ORDER BY name;", null);
+		return getReadableDatabase().rawQuery(GET_ALL_QUERY, null);
+	}
+	
+	public Cursor getById(String id) {
+		String[] args = { id };
+		
+		return getReadableDatabase().rawQuery(GET_BY_ID_QUERY, args);
 	}
 	
 	public String getName(Cursor c) {

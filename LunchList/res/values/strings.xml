@@ -12,5 +12,6 @@
     <string name="save_label">Save</string>
     <string name="row_icon_content_description">Row icon</string>
     <string name="notes_label">Notes:</string>
+    <string name="lunchlist_empty">Click the MENU button to add a restaurant!</string>
 
 </resources>
