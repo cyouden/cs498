@@ -11,8 +11,8 @@ public class RestaurantHelper extends SQLiteOpenHelper {
 	private static final int SCHEMA_VERSION = 1;
 	
 	// Database queries
-	private static final String GET_ALL_QUERY = "SELECT _id, name, address, type, notes FROM restaurants ORDER BY name;";
-	private static final String GET_BY_ID_QUERY = "SELECT _id, name, address, type, notes FROM restaurants WHERE _ID=?;";
+	private static final String GET_ALL_QUERY = "SELECT _id, name, address, type, notes FROM restaurants ORDER BY ";
+	private static final String GET_BY_ID_QUERY = "SELECT _id, name, address, type, notes FROM restaurants WHERE _ID=?";
 	
 	public RestaurantHelper(Context context) {
 		super(context, DATABASE_NAME, null, SCHEMA_VERSION);
@@ -51,8 +51,8 @@ public class RestaurantHelper extends SQLiteOpenHelper {
 		getWritableDatabase().update("restaurants", cv,  "_ID=?", args);
 	}
 	
-	public Cursor getAll() {
-		return getReadableDatabase().rawQuery(GET_ALL_QUERY, null);
+	public Cursor getAll(String orderBy) {
+		return getReadableDatabase().rawQuery(GET_ALL_QUERY + orderBy, null);
 	}
 	
 	public Cursor getById(String id) {

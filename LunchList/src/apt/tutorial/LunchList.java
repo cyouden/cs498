@@ -3,8 +3,10 @@ package apt.tutorial;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +24,7 @@ public class LunchList extends ListActivity {
 	private RestaurantHelper helper;
 	private Cursor model = null;
     private RestaurantAdapter adapter = null;
+    private SharedPreferences prefs;
 	
 	public class RestaurantAdapter extends CursorAdapter {
 		RestaurantAdapter(Cursor c) {
@@ -82,11 +85,31 @@ public class LunchList extends ListActivity {
         setContentView(R.layout.main);
         
         helper = new RestaurantHelper(this);
-        model = helper.getAll();
-        startManagingCursor(model);
-        adapter = new RestaurantAdapter(model);
-        setListAdapter(adapter);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        initList();
+        prefs.registerOnSharedPreferenceChangeListener(prefListener);
     }
+    
+    private SharedPreferences.OnSharedPreferenceChangeListener prefListener =
+		new SharedPreferences.OnSharedPreferenceChangeListener() {
+			public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+				if (key.equals("sort_order")) {
+					initList();
+				}
+			}
+		};
+		
+	private void initList() {
+		if (model != null) {
+			stopManagingCursor(model);
+			model.close();
+		}
+		
+		model = helper.getAll(prefs.getString("sort_order", "name"));
+		startManagingCursor(model);
+		adapter = new RestaurantAdapter(model);
+		setListAdapter(adapter);
+	}
     
     @Override
     public void onDestroy() {
@@ -115,6 +138,9 @@ public class LunchList extends ListActivity {
     	switch(item.getItemId()) {
     		case R.id.add:
     			startActivity(new Intent(LunchList.this, DetailForm.class));
+    			return true;
+    		case R.id.prefs:
+    			startActivity(new Intent(this, EditPreferences.class));
     			return true;
     	}
     	
