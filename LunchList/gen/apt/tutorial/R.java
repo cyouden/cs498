@@ -20,26 +20,28 @@ public final class R {
         public static final int ball_yellow=0x7f020002;
         public static final int ic_launcher=0x7f020003;
         public static final int ic_menu_add=0x7f020004;
-        public static final int ic_menu_preferences=0x7f020005;
-        public static final int list=0x7f020006;
-        public static final int restaurant=0x7f020007;
-        public static final int run=0x7f020008;
-        public static final int toast=0x7f020009;
+        public static final int ic_menu_friendslist=0x7f020005;
+        public static final int ic_menu_preferences=0x7f020006;
+        public static final int list=0x7f020007;
+        public static final int restaurant=0x7f020008;
+        public static final int run=0x7f020009;
+        public static final int toast=0x7f02000a;
     }
     public static final class id {
-        public static final int add=0x7f08000c;
+        public static final int add=0x7f08000d;
         public static final int address=0x7f080002;
-        public static final int address_row_view=0x7f08000b;
+        public static final int address_row_view=0x7f08000c;
         public static final int delivery=0x7f080006;
         public static final int details=0x7f080000;
-        public static final int icon=0x7f080009;
+        public static final int feed=0x7f080008;
+        public static final int icon=0x7f08000a;
         public static final int name=0x7f080001;
         public static final int notes=0x7f080007;
-        public static final int prefs=0x7f08000d;
-        public static final int save=0x7f080008;
+        public static final int prefs=0x7f08000e;
+        public static final int save=0x7f080009;
         public static final int sit_down=0x7f080005;
         public static final int take_out=0x7f080004;
-        public static final int title=0x7f08000a;
+        public static final int title=0x7f08000b;
         public static final int types=0x7f080003;
     }
     public static final class layout {
@@ -48,15 +50,18 @@ public final class R {
         public static final int row=0x7f030002;
     }
     public static final class menu {
-        public static final int option=0x7f070000;
+        public static final int details_option=0x7f070000;
+        public static final int option=0x7f070001;
     }
     public static final class string {
         public static final int address_label=0x7f060003;
         public static final int app_name=0x7f060001;
         public static final int delivery_label=0x7f060007;
+        public static final int feed_hint=0x7f06000d;
         public static final int hello=0x7f060000;
         public static final int lunchlist_empty=0x7f06000b;
         public static final int name_label=0x7f060002;
+        public static final int notes_hint=0x7f06000c;
         public static final int notes_label=0x7f06000a;
         public static final int row_icon_content_description=0x7f060009;
         public static final int save_label=0x7f060008;

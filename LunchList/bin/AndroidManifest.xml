@@ -6,6 +6,8 @@
 
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="10"/>
     <supports-screens android:smallScreens="false" android:largeScreens="true" android:normalScreens="true"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -21,6 +23,7 @@
         </activity>
         <activity android:name=".DetailForm"></activity>
         <activity android:name=".EditPreferences"></activity>
+        <activity android:name=".FeedActivity"></activity>
     </application>
 
 </manifest>

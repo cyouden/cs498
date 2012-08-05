@@ -13,5 +13,7 @@
     <string name="row_icon_content_description">Row icon</string>
     <string name="notes_label">Notes:</string>
     <string name="lunchlist_empty">Click the MENU button to add a restaurant!</string>
+    <string name="notes_hint">Notes</string>
+    <string name="feed_hint">Feed URL</string>
 
 </resources>
