@@ -45,6 +45,11 @@
 					android:text="@string/delivery_label" />
 			</RadioGroup>
 		</TableRow>
+		
+		<TableRow>
+		    <TextView android:text="@string/location_label" />
+		    <TextView android:text="@string/location_default" android:id="@+id/location" />
+		</TableRow>
 
 		<EditText 
 			android:id="@+id/notes"
@@ -60,12 +65,5 @@
 			android:id="@+id/feed"
 			android:inputType="text"
 			android:hint="@string/feed_hint" />
-				
-		<Button
-			android:id="@+id/save"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:text="@string/save_label" />
-	
 	</TableLayout>
 </ScrollView>
