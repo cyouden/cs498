@@ -26,6 +26,8 @@ public class DetailForm extends Activity {
 	private RestaurantHelper helper;
 	private String restaurantId = null; 
 	private LocationManager locMgr = null;
+	private double latitude = 0.;
+	private double longitude = 0.;
 		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -121,6 +123,11 @@ public class DetailForm extends Activity {
 				break;
 		}
 		
+		latitude = helper.getLatitude(cursor);
+		longitude = helper.getLongitude(cursor);
+		
+		location.setText(String.valueOf(latitude) + ", " + String.valueOf(longitude));
+		
 		cursor.close();
 	}
 	
@@ -155,6 +162,7 @@ public class DetailForm extends Activity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		if (restaurantId == null) {
 			menu.findItem(R.id.location).setEnabled(false);
+			menu.findItem(R.id.map).setEnabled(false);
 		}
 		
 		return super.onPrepareOptionsMenu(menu);
@@ -177,6 +185,16 @@ public class DetailForm extends Activity {
 				return true;
 			case R.id.location:
 				locMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, onLocationChange);
+				
+				return true;
+			case R.id.map:
+				Intent i = new Intent(this, RestaurantMap.class);
+				
+				i.putExtra(RestaurantMap.EXTRA_LATITUDE, latitude);
+				i.putExtra(RestaurantMap.EXTRA_LONGITUDE, longitude);
+				i.putExtra(RestaurantMap.EXTRA_NAME, name.getText().toString());
+				
+				startActivity(i);
 				
 				return true;
 		}
