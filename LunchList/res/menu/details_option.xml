@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/feed" android:icon="@drawable/ic_menu_friendslist" android:title="RSS Feed"></item>
+    <item android:id="@+id/location" android:icon="@drawable/ic_menu_compass" android:title="Save Location"></item>
+    <item android:id="@+id/map" android:icon="@drawable/ic_menu_mapmode" android:title="Show on Map"></item>
+    
+
+</menu>
