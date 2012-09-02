@@ -1,6 +1,7 @@
 package apt.tutorial;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,9 @@ public class LunchList extends Activity {
         Button save = (Button)findViewById(R.id.save);
         
         save.setOnClickListener(onSave);
+
+        Typeface t = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD);
+        save.setTypeface(t);
     }
     
     private View.OnClickListener onSave = new View.OnClickListener() {
