@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 public class LunchList extends Activity {
     List<Restaurant> model = new ArrayList<Restaurant>();
@@ -25,9 +25,9 @@ public class LunchList extends Activity {
         
         save.setOnClickListener(onSave);
         
-        ListView list = (ListView)findViewById(R.id.restaurants);
+        Spinner list = (Spinner)findViewById(R.id.restaurants);
         
-        adapter = new ArrayAdapter<Restaurant>(this, android.R.layout.simple_list_item_1, model);
+        adapter = new ArrayAdapter<Restaurant>(this, android.R.layout.simple_dropdown_item_1line, model);
         
         list.setAdapter(adapter);
     }
@@ -44,7 +44,6 @@ public class LunchList extends Activity {
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());		
 			
-			//TODO: this should really be an enum
 			switch (types.getCheckedRadioButtonId()) {
 				case R.id.sit_down:
 					r.setType("sit_down");
