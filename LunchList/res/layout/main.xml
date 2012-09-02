@@ -38,28 +38,7 @@
         <RadioGroup
             android:id="@+id/types"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <RadioButton
-                android:id="@+id/take_out"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/take_out_label" />
-
-            <RadioButton
-                android:id="@+id/sit_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sit_down_label" />
-
-            <RadioButton
-                android:id="@+id/delivery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/delivery_label" />
-
-        </RadioGroup>
+            android:layout_height="wrap_content" />
 
     </TableRow>
   
