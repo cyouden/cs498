@@ -18,7 +18,6 @@ public class LunchList extends Activity {
     private int takeOutId;
     private int deliveryId;
     
-    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +28,10 @@ public class LunchList extends Activity {
         sitDownId = createRadioButton(rg, "Sit Down");
         takeOutId = createRadioButton(rg, "Take Out");
         deliveryId = createRadioButton(rg, "Delivery");
+        
+        for (int i = 0; i < 10; ++i) {
+        	createRadioButton(rg, "Extra " + String.valueOf(i));
+        }
         
         Button save = (Button)findViewById(R.id.save);
         
