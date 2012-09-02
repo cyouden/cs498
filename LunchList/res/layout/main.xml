@@ -21,7 +21,7 @@
 	
 	    <TableRow>	
 	        <TextView android:text="@string/address_label" />	
-	        <EditText
+	        <AutoCompleteTextView
 	            android:id="@+id/address"
 	            android:inputType="textPostalAddress" />
 	
