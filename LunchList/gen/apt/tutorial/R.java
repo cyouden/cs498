@@ -33,6 +33,8 @@ public final class R {
     public static final class layout {
         public static final int main=0x7f030000;
         public static final int row=0x7f030001;
+        public static final int row2=0x7f030002;
+        public static final int row3=0x7f030003;
     }
     public static final class string {
         public static final int address_label=0x7f040003;

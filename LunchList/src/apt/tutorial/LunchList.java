@@ -22,6 +22,7 @@ public class LunchList extends Activity {
 			super(LunchList.this, R.layout.row, model);
 		}
 		
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			RestaurantHolder holder = null;
@@ -29,7 +30,20 @@ public class LunchList extends Activity {
 			if (row == null) {
 				LayoutInflater inflater = getLayoutInflater();
 				
-				row = inflater.inflate(R.layout.row, parent, false);
+				int layout;
+				Restaurant r = getItem(position);
+				
+				if (r.getType().equals("sit_down")) {
+					layout = R.layout.row3;
+				}
+				else if (r.getType().equals("take_out")) {
+					layout = R.layout.row2;
+				}
+				else {
+					layout = R.layout.row;
+				}
+				
+				row = inflater.inflate(layout, parent, false);
 				holder = new RestaurantHolder(row);
 				row.setTag(holder);
 			}
@@ -40,6 +54,26 @@ public class LunchList extends Activity {
 			holder.populateFrom(model.get(position));
 			
 			return row;
+		}
+		
+		@Override
+		public int getItemViewType(int position) {
+			Restaurant r = getItem(position);
+			
+			if (r.getType().equals("sit_down")) {
+				return 0;
+			}
+			else if (r.getType().equals("take_out")) {
+				return 1;
+			}
+			else {
+				return 2;
+			}
+		}
+		
+		@Override
+		public int getViewTypeCount() {
+			return 3;
 		}
 	}
 		
