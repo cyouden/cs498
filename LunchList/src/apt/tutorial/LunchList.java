@@ -75,6 +75,8 @@ public class LunchList extends ListActivity {
 				case DELIVERY:
 					icon.setImageResource(R.drawable.ball_green);
 					break;
+				default:
+					break;
 			}
 		}
 	}
