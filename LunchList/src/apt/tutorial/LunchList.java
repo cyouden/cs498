@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,6 +23,7 @@ public class LunchList extends TabActivity {
 	EditText name = null;
 	EditText address = null;
 	RadioGroup types = null;
+	DatePicker lastVisit = null;
 	
 	public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 		RestaurantAdapter() {
@@ -88,6 +90,7 @@ public class LunchList extends TabActivity {
         name = (EditText)findViewById(R.id.name);
 		address = (EditText)findViewById(R.id.address);
 		types = (RadioGroup)findViewById(R.id.types);
+		lastVisit = (DatePicker)findViewById(R.id.last_visit);
         
         Button save = (Button)findViewById(R.id.save);
         
@@ -124,6 +127,10 @@ public class LunchList extends TabActivity {
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());		
 			
+			r.setLastVisitDay(lastVisit.getDayOfMonth());
+			r.setLastVisitMonth(lastVisit.getMonth());
+			r.setLastVisitYear(lastVisit.getYear());
+			
 			switch (types.getCheckedRadioButtonId()) {
 				case R.id.sit_down:
 					r.setType(Restaurant.Type.SIT_DOWN);
@@ -146,6 +153,8 @@ public class LunchList extends TabActivity {
 			
 			name.setText(r.getName());
 			address.setText(r.getAddress());
+			
+			lastVisit.updateDate(r.getLastVisitYear(), r.getLastVisitMonth(), r.getLastVisitDay());
 			
 			switch(r.getType())
 			{
