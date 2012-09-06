@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="10"/>
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="15"/>
     <supports-screens android:smallScreens="false" android:largeScreens="true" android:normalScreens="true"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>

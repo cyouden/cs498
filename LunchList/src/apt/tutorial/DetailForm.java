@@ -121,6 +121,8 @@ public class DetailForm extends Activity {
 			case DELIVERY:
 				types.check(R.id.delivery);
 				break;
+			default:
+				break;
 		}
 		
 		latitude = helper.getLatitude(cursor);
