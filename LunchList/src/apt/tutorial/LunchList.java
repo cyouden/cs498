@@ -157,6 +157,9 @@ public class LunchList extends TabActivity {
 				break;
 			case DELIVERY:
 				types.check(R.id.delivery);
+				break;
+			default:
+				break;
 			}
 			
 			getTabHost().setCurrentTab(1);
