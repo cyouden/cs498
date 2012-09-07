@@ -3,7 +3,7 @@ package apt.tutorial;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.TabActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +16,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
-import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
-public class LunchList extends TabActivity {
+public class LunchList extends Activity {
 	EditText name = null;
 	EditText address = null;
 	RadioGroup types = null;
 	DatePicker lastVisit = null;
+	ViewFlipper flipper = null;
 	
 	public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 		RestaurantAdapter() {
@@ -93,6 +94,24 @@ public class LunchList extends TabActivity {
 		lastVisit = (DatePicker)findViewById(R.id.last_visit);
         
         Button save = (Button)findViewById(R.id.save);
+    
+        flipper = (ViewFlipper)findViewById(R.id.flipper);
+        
+        Button edit_button = (Button)findViewById(R.id.edit_button);
+        
+        edit_button.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				flipper.setDisplayedChild(1);
+			}
+        });
+        
+        Button list_button = (Button)findViewById(R.id.list_button);
+        
+        list_button.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				flipper.setDisplayedChild(0);
+			}
+        });
         
         save.setOnClickListener(onSave);
         
@@ -101,20 +120,6 @@ public class LunchList extends TabActivity {
         adapter = new RestaurantAdapter();
         
         list.setAdapter(adapter);
-        
-        TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
-        spec.setContent(R.id.restaurants);
-        spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
-        
-        getTabHost().addTab(spec);
-        
-        spec = getTabHost().newTabSpec("tag2");
-        spec.setContent(R.id.details);
-        spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
-        
-        getTabHost().addTab(spec);
-        
-        getTabHost().setCurrentTab(0);
         
         list.setOnItemClickListener(onListClick);
     }
@@ -171,7 +176,7 @@ public class LunchList extends TabActivity {
 				break;
 			}
 			
-			getTabHost().setCurrentTab(1);
+			flipper.setDisplayedChild(1);
 		}
 	};
 }

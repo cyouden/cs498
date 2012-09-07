@@ -13,5 +13,7 @@
     <string name="row_icon_content_description">Row icon</string>
     <string name="notes_label">Notes:</string>
     <string name="last_visit_label">Last visit:</string>
+    <string name="list_button_label">List</string>
+    <string name="edit_button_label">Edit</string>
 
 </resources>
