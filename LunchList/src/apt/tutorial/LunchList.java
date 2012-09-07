@@ -8,6 +8,7 @@ import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -185,6 +186,17 @@ public class LunchList extends TabActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 	
+	public void ErrorDialog(Exception e) {
+		String message = "And error has occurred: " + e.getClass().toString() + ": " + e.getMessage();
+		new AlertDialog.Builder(this).setMessage(message)
+			.setPositiveButton("OK", 
+				new OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) { /* do nothing */ }
+				}).show();
+		
+		Log.e("LunchList Error", message);
+	}
+		
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -194,8 +206,6 @@ public class LunchList extends TabActivity {
 				if (current != null) {
 					message = current.getNotes();
 				}
-				
-				//Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 				
 				new AlertDialog.Builder(this).setMessage(message)
 					.setPositiveButton("OK", 
@@ -207,6 +217,17 @@ public class LunchList extends TabActivity {
 				
 			case R.id.switch_tabs:
 				getTabHost().setCurrentTab((getTabHost().getCurrentTab() + 1) % 2);
+				
+				return true;
+				
+			case R.id.make_error:
+				
+				try {
+					int i = 1 / 0;
+				}
+				catch (Exception e) {
+					ErrorDialog(e);
+				}
 				
 				return true;
 		}
