@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.TabActivity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressWarnings("deprecation")
 public class LunchList extends TabActivity {
 	private EditText name = null;
 	private EditText address = null;
@@ -170,6 +172,9 @@ public class LunchList extends TabActivity {
 					break;
 				case DELIVERY:
 					types.check(R.id.delivery);
+					break;
+				default:
+					break;
 			}
 			
 			getTabHost().setCurrentTab(1);
@@ -201,7 +206,7 @@ public class LunchList extends TabActivity {
 			setProgressBarVisibility(true);
 			progress = 0;			
 			new Thread(longTask).start();
-			
+									
 			return true;
 		}
 		
@@ -228,6 +233,8 @@ public class LunchList extends TabActivity {
 			runOnUiThread(new Runnable() {
 				public void run() {
 					setProgressBarVisibility(false);
+					
+					notes.setBackgroundColor(Color.CYAN);
 				}
 			});
 		}
