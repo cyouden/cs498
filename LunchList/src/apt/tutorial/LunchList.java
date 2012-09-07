@@ -3,7 +3,10 @@ package apt.tutorial;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -166,6 +169,9 @@ public class LunchList extends TabActivity {
 					break;
 				case DELIVERY:
 					types.check(R.id.delivery);
+					break;
+				default:
+					break;
 			}
 			
 			getTabHost().setCurrentTab(1);
@@ -188,7 +194,13 @@ public class LunchList extends TabActivity {
 				message = current.getNotes();
 			}
 			
-			Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+			//Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+			
+			new AlertDialog.Builder(this).setMessage(message)
+				.setPositiveButton("OK", 
+					new OnClickListener() {
+						public void onClick(DialogInterface arg0, int arg1) { /* do nothing */ }
+					}).show();
 			
 			return true;
 		}
