@@ -23,8 +23,8 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
+@SuppressWarnings("deprecation")
 public class LunchList extends TabActivity {
 	private EditText name = null;
 	private EditText address = null;
@@ -187,22 +187,28 @@ public class LunchList extends TabActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.toast) {
-			String message = "No restaurant selected";
-			
-			if (current != null) {
-				message = current.getNotes();
-			}
-			
-			//Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-			
-			new AlertDialog.Builder(this).setMessage(message)
-				.setPositiveButton("OK", 
-					new OnClickListener() {
-						public void onClick(DialogInterface arg0, int arg1) { /* do nothing */ }
-					}).show();
-			
-			return true;
+		switch (item.getItemId()) {
+			case R.id.toast:
+				String message = "No restaurant selected";
+				
+				if (current != null) {
+					message = current.getNotes();
+				}
+				
+				//Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+				
+				new AlertDialog.Builder(this).setMessage(message)
+					.setPositiveButton("OK", 
+						new OnClickListener() {
+							public void onClick(DialogInterface arg0, int arg1) { /* do nothing */ }
+						}).show();
+				
+				return true;
+				
+			case R.id.switch_tabs:
+				getTabHost().setCurrentTab((getTabHost().getCurrentTab() + 1) % 2);
+				
+				return true;
 		}
 		
 		return super.onOptionsItemSelected(item);
