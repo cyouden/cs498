@@ -226,6 +226,14 @@ public class LunchList extends TabActivity {
 	
 	private Runnable longTask = new Runnable() {
 		public void run() {
+			runOnUiThread(new Runnable() {
+				public void run() {
+					setProgressBarVisibility(false);
+					
+					notes.setBackgroundColor(Color.WHITE);
+				}
+			});
+			
 			for (int i = 0; i < 20; ++i) {
 				doSomeLongWork(500);
 			}
