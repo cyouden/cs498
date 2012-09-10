@@ -6,6 +6,8 @@ import java.util.List;
 import android.app.TabActivity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -33,6 +36,14 @@ public class LunchList extends TabActivity {
 	private RadioGroup types = null;
 	private Restaurant current = null;
 	private int progress = 0;
+	
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			progress += msg.arg1;
+			setProgress(progress);
+		}
+	};
 	
 	public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 		RestaurantAdapter() {
@@ -214,12 +225,9 @@ public class LunchList extends TabActivity {
 	}
 	
 	private void doSomeLongWork(final int incr) {
-		runOnUiThread(new Runnable() {
-			public void run() {
-				progress += incr;
-				setProgress(progress);
-			}
-		});
+		Message msg = handler.obtainMessage();
+		msg.arg1 = incr;
+		msg.sendToTarget();
 		
 		SystemClock.sleep(250);
 	}
