@@ -27,6 +27,7 @@ public class LunchList extends ListActivity {
     private SharedPreferences prefs;
 	
 	public class RestaurantAdapter extends CursorAdapter {
+		@SuppressWarnings("deprecation")
 		RestaurantAdapter(Cursor c) {
 			super(LunchList.this, c);
 		}
@@ -101,6 +102,7 @@ public class LunchList extends ListActivity {
 			}
 		};
 		
+	@SuppressWarnings("deprecation")
 	private void initList() {
 		if (model != null) {
 			stopManagingCursor(model);

@@ -27,7 +27,12 @@
         <activity android:name=".FeedActivity"></activity>
         <activity android:name=".RestaurantMap"></activity><service android:name=".FeedService"></service>
         <uses-library android:name="com.google.android.maps" android:required="true"/>
-        
+        <receiver android:name=".OnBootReceiver" android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".OnAlarmReceiver"></receiver>
     </application>
 
 </manifest>

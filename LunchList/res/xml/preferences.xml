@@ -6,4 +6,14 @@
         android:entries="@array/sort_names"
         android:entryValues="@array/sort_clauses"
         android:dialogTitle="Choose a sort order" />
+    <CheckBoxPreference
+        android:key="alarm"
+        android:title="Sound a Lunch Alarm"
+        android:summary="Check if you want to know when it is time for lunch" />
+    <apt.tutorial.TimePreference
+        android:key="alarm_time"
+        android:title="Lunch Time Alarm"
+        android:defaultValue="12:00"
+        android:summary="Set your desired time for the lunch alarm"
+        android:dependency="alarm" />
 </PreferenceScreen>

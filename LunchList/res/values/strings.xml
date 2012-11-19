@@ -17,5 +17,6 @@
     <string name="feed_hint">Feed URL</string>
     <string name="location_label">Location:</string>
     <string name="location_default">(not set)</string>
+    <string name="alarm_message">It\'s time for lunch!</string>
 
 </resources>

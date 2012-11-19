@@ -90,6 +90,7 @@ public class FeedActivity extends ListActivity {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
