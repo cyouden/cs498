@@ -18,5 +18,7 @@
     <string name="location_label">Location:</string>
     <string name="location_default">(not set)</string>
     <string name="alarm_message">It\'s time for lunch!</string>
+    <string name="next_button_description">Next Button</string>
+    <string name="empty">No restaurants!</string>
 
 </resources>
