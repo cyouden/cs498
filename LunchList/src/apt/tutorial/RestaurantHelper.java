@@ -11,10 +11,10 @@ public class RestaurantHelper extends SQLiteOpenHelper {
 	private static final int SCHEMA_VERSION = 3;
 	
 	// SQL
-	private static final String ALL_COLUMNS = "*"; // replace with *?
+	private static final String ALL_COLUMNS = "_id, name, address, type, notes, feed, latitude, longitude"; // replace with *?
 	private static final String GET_ALL_QUERY = "SELECT " + ALL_COLUMNS + " FROM restaurants ORDER BY ";
 	private static final String GET_BY_ID_QUERY = "SELECT " + ALL_COLUMNS + " FROM restaurants WHERE _ID=?";
-	private static final String CREATE_TABLE = "CREATE TABLE restaurants (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, address TEXT, type TEXT, notes TEXT, feed TEXT)";
+	private static final String CREATE_TABLE = "CREATE TABLE restaurants (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, address TEXT, type TEXT, notes TEXT, feed TEXT, latitude REAL, longitude REAL)";
 	private static final String ADD_FEED_COLUMN = "ALTER TABLE restaurants ADD COLUMN feed TEXT";
 	private static final String ADD_LAT_COLUMN = "ALTER TABLE restaurants ADD COLUMN latitude REAL";
 	private static final String ADD_LON_COLUMN = "ALTER TABLE restaurants ADD COLUMN longitude REAL";
